@@ -35,8 +35,7 @@ Set_Swap()
 Enable_Rc_Local()
 {
 PART1=`systemctl status rc-local | grep -i active | awk -F ' ' '{print $2}'`
-PART2=`ls /etc/rc.local`
-if [ "$PART1" == "inactive" ] && [ "$PART2" != "/etc/rc.local" ]; then
+if [ "$PART1" == "inactive" ] && [ ! -f "/etc/rc.local" ]; then
 cat <<EOF >/etc/rc.local
 #!/bin/sh -e
 #
